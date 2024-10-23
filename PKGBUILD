@@ -11,6 +11,9 @@ _pyver="$( \
     awk \
       '{print $2}')"
 _pymajver="${_pyver%.*}"
+_pyminver="${_pymajver#*.}"
+_pynextver="${_pymajver%.*}.$(( \
+  ${_pyminver} + 1))"
 _pkg=frozenlist
 pkgname="${_py}-${_pkg}"
 pkgver=1.4.1
@@ -34,6 +37,7 @@ license=(
 )
 depends=(
   "${_py}>=${_pymajver}"
+  "${_py}<${_pynextver}"
 )
 makedepends=(
   'cython'
