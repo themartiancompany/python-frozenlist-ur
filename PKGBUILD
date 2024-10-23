@@ -5,6 +5,12 @@
 # Maintainer: Jelle van der Waa <jelle@vdwaa.nl>
 
 _py="python"
+_pyver="$( \
+  "${_py}" \
+    -V | \
+    awk \
+      '{print $2}')"
+_pymajver="${_pyver%.*}"
 _pkg=frozenlist
 pkgname="${_py}-${_pkg}"
 pkgver=1.4.1
@@ -27,7 +33,7 @@ license=(
   'Apache'
 )
 depends=(
-  "${_py}"
+  "${_py}>=${_pymajver}"
 )
 makedepends=(
   'cython'
